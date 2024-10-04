@@ -22,7 +22,7 @@
     <div class="flex justify-between mt-[14px]">
       <div class="flex flex-col">
         <span class="text-[#BDBDBD] text-[11px] uppercase">Цена:</span>
-        <span class="font-bold text-[14px]"> {{ sneaker.price }}руб.</span>
+        <span class="font-bold text-[14px]"> {{ sneaker.price }}c.</span>
       </div>
 
       <img 

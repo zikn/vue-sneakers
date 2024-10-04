@@ -110,14 +110,52 @@ const removeFromLiked = (e) => {
 
 const addToCart = (e) => {
   cart.value.push(e);
-}
+};
 
 const removeFromCart = (e) => {
-  cart.value = cart.value.filter(item => item.id !==e.id);
-}
+  cart.value = cart.value.filter((item) => item.id !== e.id);
+};
 </script>
 
 <template>
+  <div
+    class="popup bg-black/[0.5] h-[100vh] absolute z-10 top-0 left-0 w-full flex justify-end"
+  >
+    <div class="h-[100%] w-[385px] bg-white p-[32px]">
+      <p class="font-bold text-[24px] mb-[30px]">Корзина</p>
+      <div class="flex flex-col gap-[20px]">
+        <div
+          class="border-[1px] border-[#F3F3F3] rounded-[20px] flex p-[20px] gap-[20px]"
+          v-for="(sneaker, i) in sneakers.slice(0, 3)"
+          :key="i"
+        >
+          <img class="h-[70px] w-[70px]" :src="sneaker.sneakersUrl" alt="" />
+          <div>
+            <h2 class="font-normal text-[14px]">
+              {{ sneaker.title }}
+            </h2>
+            <p class="font-bold text-[14px]">{{ sneaker.price }} с.</p>
+          </div>
+          <img src="../assets/close.svg" alt="" />
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between">
+          <h3>Итого:</h3>
+          <p>21 498 c.</p>
+        </div>
+        <div class="flex justify-between">
+          <h3>Налог 5%:</h3>
+          <p>1074 c.</p>
+        </div>
+        <button class="bg-[#9DD458] flex text-white w-full py-[18px] justify-center">
+          Оформить заказ
+          <img src="../assets/arrow.svg" alt="">
+
+        </button>
+      </div>
+    </div>
+  </div>
   <Swiper
     :slides-per-view="1"
     :space-between="50"

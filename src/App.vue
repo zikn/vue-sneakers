@@ -19,7 +19,6 @@
     </header>
 
     <div class="p-[60px]"><RouterView /></div>
-    
   </div>
 </template>
 
