@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const isOpen = ref(false);
+
+const changeIsOpen = () => {
+  isOpen.value = false;
+};
+</script>
 
 <template>
   <div class="bg-white rounded-[20px]">
@@ -7,10 +15,10 @@
     >
       <img src="./assets/sneakers.svg" alt="" />
       <nav class="flex gap-[32px] item-center">
-        <RouterLink class="flex gap-[10px]" to="/">
-          <img src="./assets/basket.svg" alt="" />
-          <span>1205 руб.</span>
-        </RouterLink>
+        <div class="flex gap-[10px]" @click="isOpen = true">
+          <img class="cursor-pointer" src="./assets/basket.svg" alt="" />
+          <span class="cursor-pointer">1205 руб.</span>
+        </div>
         <RouterLink class="flex gap-[10px]" to="/favorite">
           <img src="./assets/heart.svg" alt="" />
           <span>Закладки</span>
@@ -18,7 +26,7 @@
       </nav>
     </header>
 
-    <div class="p-[60px]"><RouterView /></div>
+    <div class="p-[60px]"><RouterView :isOpen="isOpen" @bob="changeIsOpen" /></div>
   </div>
 </template>
 

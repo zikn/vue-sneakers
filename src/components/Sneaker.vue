@@ -51,7 +51,7 @@ const isAdded = ref(true);
 
 const addToLiked = (sneaker) => {
   isLiked.value = false;
-  emit('jazgul', sneaker)
+  emit('jazgul', false)
 };
 
 const removeFromLiked = (sneaker) => {

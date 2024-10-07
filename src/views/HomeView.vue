@@ -22,6 +22,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+defineProps(['isOpen']);
+const emit = defineEmits();
+
 const sneakers = [
   {
     id: 0,
@@ -115,18 +118,28 @@ const addToCart = (e) => {
 const removeFromCart = (e) => {
   cart.value = cart.value.filter((item) => item.id !== e.id);
 };
+
+const changeIsOpen = () => {
+ emit('bob', false)
+}
 </script>
 
 <template>
   <div
-    class="popup bg-black/[0.5] h-[100vh] absolute z-10 top-0 left-0 w-full flex justify-end"
+    class="popup bg-black/[0.5] h-[100vh] fixed z-20 top-0 left-0 w-full flex justify-end"
+    v-if="isOpen"
   >
-    <div class="h-[100%] w-[385px] bg-white p-[32px]">
-      <p class="font-bold text-[24px] mb-[30px]">Корзина</p>
-      <div class="flex flex-col gap-[20px]">
+    <div class="h-[100%] w-[385px] bg-white p-[32px] flex flex-col">
+      <p class="font-bold text-[24px] mb-[30px] flex justify-between">
+        Корзина 
+        <img class="cursor-pointer"
+        @click="changeIsOpen"
+        src="../assets/close.svg" alt="" />
+      </p>
+      <div class="flex flex-col gap-[20px] flex-1 overflow-y-auto">
         <div
           class="border-[1px] border-[#F3F3F3] rounded-[20px] flex p-[20px] gap-[20px]"
-          v-for="(sneaker, i) in sneakers.slice(0, 3)"
+          v-for="(sneaker, i) in sneakers.slice(0, 5)"
           :key="i"
         >
           <img class="h-[70px] w-[70px]" :src="sneaker.sneakersUrl" alt="" />
@@ -140,18 +153,21 @@ const removeFromCart = (e) => {
         </div>
       </div>
       <div>
-        <div class="flex justify-between">
+        <div class="flex">
           <h3>Итого:</h3>
-          <p>21 498 c.</p>
+          <div class="flex-1 border-dashed border-b-[1px]"></div>
+          <p class="font-semibold text-[16px]">21 498 c.</p>
         </div>
-        <div class="flex justify-between">
+        <div class="flex mt-[15px]">
           <h3>Налог 5%:</h3>
-          <p>1074 c.</p>
+          <div class="flex-1 border-dashed border-b-[1px]"></div>
+          <p class="font-semibold">1074 c.</p>
         </div>
-        <button class="bg-[#9DD458] flex text-white w-full py-[18px] justify-center rounded-[18px] text-center">
-          Оформить заказ
-          <img class="flex justify-center" src="../assets/arrow.svg" alt="">
-
+        <button
+          class="bg-[#9DD458] flex text-white w-full py-[18px] justify-center rounded-[18px] font-semibold text-[16px] items-center relative mt-[24px]"
+        >
+          <span class="">Оформить заказ</span>
+          <img class="absolute right-[29px]" src="../assets/arrow.svg" alt="" />
         </button>
       </div>
     </div>
