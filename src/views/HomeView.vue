@@ -148,9 +148,9 @@ const removeFromCart = (e) => {
           <h3>Налог 5%:</h3>
           <p>1074 c.</p>
         </div>
-        <button class="bg-[#9DD458] flex text-white w-full py-[18px] justify-center">
+        <button class="bg-[#9DD458] flex text-white w-full py-[18px] justify-center rounded-[18px] text-center">
           Оформить заказ
-          <img src="../assets/arrow.svg" alt="">
+          <img class="flex justify-center" src="../assets/arrow.svg" alt="">
 
         </button>
       </div>
