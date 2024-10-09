@@ -113,10 +113,12 @@ const removeFromLiked = (e) => {
 
 const addToCart = (e) => {
   cart.value.push(e);
+  emit('total', e.price)
 };
 
 const removeFromCart = (e) => {
   cart.value = cart.value.filter((item) => item.id !== e.id);
+  emit('topaz', e.price)
 };
 
 const changeIsOpen = () => {
@@ -125,6 +127,12 @@ const changeIsOpen = () => {
 </script>
 
 <template>
+  <div>
+    <img src="" alt="">
+    <p></p>
+    <p></p>
+    <button></button>
+  </div>
   <div
     class="popup bg-black/[0.5] h-[100vh] fixed z-20 top-0 left-0 w-full flex justify-end"
     v-if="isOpen"
@@ -139,7 +147,7 @@ const changeIsOpen = () => {
       <div class="flex flex-col gap-[20px] flex-1 overflow-y-auto">
         <div
           class="border-[1px] border-[#F3F3F3] rounded-[20px] flex p-[20px] gap-[20px]"
-          v-for="(sneaker, i) in sneakers.slice(0, 5)"
+          v-for="(sneaker, i) in cart"
           :key="i"
         >
           <img class="h-[70px] w-[70px]" :src="sneaker.sneakersUrl" alt="" />
@@ -149,14 +157,16 @@ const changeIsOpen = () => {
             </h2>
             <p class="font-bold text-[14px]">{{ sneaker.price }} с.</p>
           </div>
-          <img src="../assets/close.svg" alt="" />
+          <img src="../assets/close.svg" alt="" @click="removeFromCart(sneaker)"/>
         </div>
       </div>
       <div>
         <div class="flex">
           <h3>Итого:</h3>
           <div class="flex-1 border-dashed border-b-[1px]"></div>
-          <p class="font-semibold text-[16px]">21 498 c.</p>
+          <p class="font-semibold text-[16px]">{{cart.reduce((accumulator, sneaker) => {
+  return accumulator + sneaker.price;
+}, 0)}} c.</p>
         </div>
         <div class="flex mt-[15px]">
           <h3>Налог 5%:</h3>

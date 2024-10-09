@@ -1,11 +1,20 @@
 <script setup>
 import { ref } from "vue";
 
+
 const isOpen = ref(false);
+const totalSum = ref(0)
 
 const changeIsOpen = () => {
   isOpen.value = false;
 };
+const addToCart = (e) => {
+  totalSum.value += e 
+}
+const deleteFromCart = (e) => {
+  totalSum.value -= e 
+}
+
 </script>
 
 <template>
@@ -17,7 +26,7 @@ const changeIsOpen = () => {
       <nav class="flex gap-[32px] item-center">
         <div class="flex gap-[10px]" @click="isOpen = true">
           <img class="cursor-pointer" src="./assets/basket.svg" alt="" />
-          <span class="cursor-pointer">1205 руб.</span>
+          <span class="cursor-pointer" :total="total">{{totalSum}} c.</span>
         </div>
         <RouterLink class="flex gap-[10px]" to="/favorite">
           <img src="./assets/heart.svg" alt="" />
@@ -26,7 +35,7 @@ const changeIsOpen = () => {
       </nav>
     </header>
 
-    <div class="p-[60px]"><RouterView :isOpen="isOpen" @bob="changeIsOpen" /></div>
+    <div class="p-[60px]"><RouterView :isOpen="isOpen" @bob="changeIsOpen" @total="addToCart" @topaz="deleteFromCart"/></div>
   </div>
 </template>
 
